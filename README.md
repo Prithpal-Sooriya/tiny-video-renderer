@@ -58,22 +58,22 @@ A project's `timeline.ts` default-exports `{ meta: { title }, segments: [{ id, t
 
 ## Styles
 
-The renderer has no built-in look. A style is one self-contained CSS file that your timeline imports (`import "./styles/midnight/style.css";`); swapping styles is changing that line. Each lives in its own folder under [example/styles](example/styles) with a `style.css`, a `STYLE.md` (when to use it, rules for agents) and a `preview.mp4` rendered from the example:
+The renderer has no built-in look. A style is one self-contained CSS file that your timeline imports (`import "./styles/motion-engineering/style.css";`); swapping styles is changing that line. Each lives in its own folder under [example/styles](example/styles) with a `style.css`, a `STYLE.md` (when to use it, rules for agents) and a `preview.mp4` rendered from the example:
 
 | Style | Look | Preview |
 |---|---|---|
-| `midnight` (default) | dark navy, orange accent, system sans | [preview.mp4](example/styles/midnight/preview.mp4) |
+| `midnight` | dark navy, orange accent, system sans | [preview.mp4](example/styles/midnight/preview.mp4) |
 | `paper` | warm off-white, serif titles, blue accent | [preview.mp4](example/styles/paper/preview.mp4) |
-| `motion-engineering` | aerospace HUD: blueprint grid, corner ticks, Space Grotesk + JetBrains Mono (embedded) | [preview.mp4](example/styles/motion-engineering/preview.mp4) |
+| `motion-engineering` (default) | aerospace HUD: blueprint grid, corner ticks, Space Grotesk + JetBrains Mono (embedded) | [preview.mp4](example/styles/motion-engineering/preview.mp4) |
 
-To use one, copy its folder into your project (the server only serves files inside the project) and import its `style.css`. To make your own, style the contract classes the segments use, and nothing else, so any style can replace any other:
+To use one, copy its folder into your project (the server only serves files inside the project) and import its `style.css`. To make your own, style the contract classes the segments use, and nothing else, so any style can replace any other. The `tvr-` prefix keeps these from colliding with class names in your own segments; tokens, fonts and the page background are global:
 
 | Class | Role |
 |---|---|
-| `.stage` | full-frame container: layout and padding |
-| `.line` | one animated-in row; must start at `opacity: 0` because segments animate it in |
-| `.title`, `.subtitle` | the big heading and its second line |
-| `.accent` | highlight colour |
+| `.tvr-stage` | full-frame container: layout and padding |
+| `.tvr-line` | one animated-in row; must start at `opacity: 0` because segments animate it in |
+| `.tvr-title`, `.tvr-subtitle` | the big heading and its second line |
+| `.tvr-accent` | highlight colour |
 
 Fonts: use system fonts, or embed them in `style.css` as `@font-face` data URLs (as `motion-engineering` does, so rendering needs no network). The renderer waits for fonts before each screenshot. `motion-engineering` is adapted from [videowright](https://github.com/scosman/videowright)'s style of the same name (MIT); its fonts are SIL OFL.
 

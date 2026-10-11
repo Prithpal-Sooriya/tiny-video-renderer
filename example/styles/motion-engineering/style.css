@@ -69,15 +69,15 @@
 }
 
 body { background-color: var(--color-bg); background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 64px 64px; color: var(--color-fg); font-family: var(--font-body); font-variant-numeric: tabular-nums; }
-.stage { position: relative; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; padding: var(--safe-y) var(--safe-x); gap: var(--space-md); }
+.tvr-stage { position: relative; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; padding: var(--safe-y) var(--safe-x); gap: var(--space-md); }
 /* corner ticks frame the content area */
-.stage::before { content: ""; position: absolute; inset: 40px; pointer-events: none; --t: rgba(79, 209, 224, 0.75);
+.tvr-stage::before { content: ""; position: absolute; inset: 40px; pointer-events: none; --t: rgba(79, 209, 224, 0.75);
 	background:
 		linear-gradient(var(--t), var(--t)) top left / 28px 1px no-repeat, linear-gradient(var(--t), var(--t)) top left / 1px 28px no-repeat,
 		linear-gradient(var(--t), var(--t)) top right / 28px 1px no-repeat, linear-gradient(var(--t), var(--t)) top right / 1px 28px no-repeat,
 		linear-gradient(var(--t), var(--t)) bottom left / 28px 1px no-repeat, linear-gradient(var(--t), var(--t)) bottom left / 1px 28px no-repeat,
 		linear-gradient(var(--t), var(--t)) bottom right / 28px 1px no-repeat, linear-gradient(var(--t), var(--t)) bottom right / 1px 28px no-repeat; }
-.line { opacity: 0; font-size: 44px; line-height: 1.25; }
-.title { font-family: var(--font-display); font-weight: 500; font-size: 104px; letter-spacing: -0.02em; line-height: 1.05; }
-.subtitle { font-family: var(--font-mono); font-size: 30px; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.08em; }
-.accent { color: var(--color-accent); }
+.tvr-line { opacity: 0; font-size: 44px; line-height: 1.25; }
+.tvr-title { font-family: var(--font-display); font-weight: 500; font-size: 104px; letter-spacing: -0.02em; line-height: 1.05; }
+.tvr-subtitle { font-family: var(--font-mono); font-size: 30px; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.08em; }
+.tvr-accent { color: var(--color-accent); }

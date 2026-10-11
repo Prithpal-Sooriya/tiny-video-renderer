@@ -1,4 +1,4 @@
-import "./styles/midnight/style.css";
+import "./styles/motion-engineering/style.css";
 import type { Timeline } from "videowright";
 
 const timeline: Timeline = {

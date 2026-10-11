@@ -1,9 +1,9 @@
 /* midnight: dark, high-contrast, orange accent. A theme styles the contract classes listed in the README
-   (.stage .line .title .subtitle .accent) and nothing else, so any theme can replace any other. */
+   (.tvr-stage .tvr-line .tvr-title .tvr-subtitle .tvr-accent) and nothing else, so any theme can replace any other. */
 :root { --bg: #0b1118; --fg: #e8eef5; --muted: #8b9bb0; --accent: #ff8a1f; --font: "Helvetica Neue", Arial, sans-serif; }
 body { background: radial-gradient(1200px 700px at 15% 10%, #16212e 0%, var(--bg) 60%); color: var(--fg); font-family: var(--font); }
-.stage { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 96px; gap: 24px; border-left: 8px solid var(--accent); }
-.line { opacity: 0; font-size: 44px; line-height: 1.25; }
-.title { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
-.subtitle { color: var(--muted); font-size: 40px; }
-.accent { color: var(--accent); }
+.tvr-stage { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 96px; gap: 24px; border-left: 8px solid var(--accent); }
+.tvr-line { opacity: 0; font-size: 44px; line-height: 1.25; }
+.tvr-title { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+.tvr-subtitle { color: var(--muted); font-size: 40px; }
+.tvr-accent { color: var(--accent); }

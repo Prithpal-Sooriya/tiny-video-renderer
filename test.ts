@@ -145,6 +145,6 @@ test("every style has a folder with style.css, STYLE.md and the whole class cont
 	for (const s of styles) {
 		for (const f of ["style.css", "STYLE.md"]) assert.ok(existsSync(join(dir, s, f)), `${s}/${f} is missing`);
 		const css = readFileSync(join(dir, s, "style.css"), "utf-8");
-		for (const cls of [".stage", ".line", ".title", ".subtitle", ".accent"]) assert.ok(css.includes(cls), `${s}/style.css is missing ${cls}`);
+		for (const cls of [".tvr-stage", ".tvr-line", ".tvr-title", ".tvr-subtitle", ".tvr-accent"]) assert.ok(css.includes(cls), `${s}/style.css is missing ${cls}`);
 	}
 });

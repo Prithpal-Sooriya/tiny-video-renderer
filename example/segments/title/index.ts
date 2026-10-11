@@ -7,10 +7,10 @@ export default defineSegment({
 	advances: [3], // no beats, so just the segment's length: 3 seconds
 	mount(el) {
 		host = el;
-		el.innerHTML = `<div class="stage"><div class="line title">tiny-video-renderer</div><div class="line subtitle">TypeScript + Web Animations <span class="accent">→</span> MP4</div></div>`;
+		el.innerHTML = `<div class="tvr-stage"><div class="tvr-line tvr-title">tiny-video-renderer</div><div class="tvr-line tvr-subtitle">TypeScript + Web Animations <span class="tvr-accent">→</span> MP4</div></div>`;
 	},
 	async play(ctx) {
-		host.querySelectorAll(".line").forEach((l, i) => l.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 500, delay: i * 400, fill: "forwards" }));
+		host.querySelectorAll(".tvr-line").forEach((l, i) => l.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 500, delay: i * 400, fill: "forwards" }));
 		await ctx.hold(3000);
 	},
 });
