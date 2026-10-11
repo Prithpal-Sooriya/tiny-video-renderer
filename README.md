@@ -12,8 +12,8 @@ It is a cut-down [videowright](https://github.com/scosman/videowright) 0.1.1 (MI
 
    ```bash
    mkdir -p render
-   curl -fsSL https://raw.githubusercontent.com/Prithpal-Sooriya/tiny-video-renderer/v0.1.1/vw.ts -o render/vw.ts
-   echo "8ffd959ff999196f882cbec4f935376397ccde49446e871d0f9a00cfb5336e4f  render/vw.ts" | (sha256sum -c - 2>/dev/null || shasum -a 256 -c -)
+   curl -fsSL https://raw.githubusercontent.com/Prithpal-Sooriya/tiny-video-renderer/v0.2.1/vw.ts -o render/vw.ts
+   echo "2f5312719634a0c9b55af66ba23d02e35d54ba8da9340b99cb829147211c175c  render/vw.ts" | (sha256sum -c - 2>/dev/null || shasum -a 256 -c -)
    ```
 
 2. Append this to the skill's `SKILL.md` (adjust the `render/` path if you put the file elsewhere):
