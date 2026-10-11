@@ -12,8 +12,8 @@ It is a cut-down [videowright](https://github.com/scosman/videowright) 0.1.1 (MI
 
    ```bash
    mkdir -p render
-   curl -fsSL https://raw.githubusercontent.com/Prithpal-Sooriya/tiny-video-renderer/v0.1.0/vw.ts -o render/vw.ts
-   echo "b79dfa0d5b18e08e2bcc525aed8aaef56dd3f082e831535fb93ee11899a58b59  render/vw.ts" | (sha256sum -c - 2>/dev/null || shasum -a 256 -c -)
+   curl -fsSL https://raw.githubusercontent.com/Prithpal-Sooriya/tiny-video-renderer/v0.1.1/vw.ts -o render/vw.ts
+   echo "8ffd959ff999196f882cbec4f935376397ccde49446e871d0f9a00cfb5336e4f  render/vw.ts" | (sha256sum -c - 2>/dev/null || shasum -a 256 -c -)
    ```
 
 2. Append this to the skill's `SKILL.md` (adjust the `render/` path if you put the file elsewhere):
@@ -28,7 +28,7 @@ It is a cut-down [videowright](https://github.com/scosman/videowright) 0.1.1 (MI
        node render/vw.ts render <timeline.ts> --output out.mp4
 
    Project: a folder with `videowright.config.ts`, a `timeline.ts`, and `segments/<id>/index.ts`.
-   See https://github.com/Prithpal-Sooriya/tiny-video-renderer/tree/v0.1.0/example for a complete one.
+   See https://github.com/Prithpal-Sooriya/tiny-video-renderer/tree/v0.1.1/example for a complete one.
 
    Segment code rules:
    - Erasable TypeScript only: no enum, namespace, constructor parameter properties or decorators. Use `import type`.
