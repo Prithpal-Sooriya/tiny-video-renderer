@@ -57,7 +57,7 @@ test("ffmpeg: audio is padded and clipped to the video length", () => {
 test("loader: bare 'videowright', CSS imports and .js-for-.ts imports resolve", async () => {
 	const dir = project({ "audio/track.ts": "export default { n: 1 };\n", "uses_js.ts": 'import t from "./audio/track.js";\nexport default t;\n' });
 	assert.equal((await loadModule(join(dir, "videowright.config.ts"))).default.projectStructure, "v1");
-	assert.deepEqual((await loadModule(join(dir, "timeline.ts"))).default.segments.map((s: any) => s.id), ["title", "steps"]); // imports ./themes/midnight.css
+	assert.deepEqual((await loadModule(join(dir, "timeline.ts"))).default.segments.map((s: any) => s.id), ["title", "steps"]); // imports ./styles/midnight/style.css
 	assert.deepEqual((await loadModule(join(dir, "uses_js.ts"))).default, { n: 1 });
 });
 
@@ -77,7 +77,7 @@ test("server: strips types, resolves extensionless, wraps CSS, guards paths, sen
 		assert.ok(!browser.includes("node:child_process") && !browser.includes("startServer"), "Chrome must not receive the Node half");
 
 		assert.match(await (await get("/c/segments/label")).text(), /export function label\(text\s*\)\s*\{/); // extensionless; types become spaces
-		assert.match(await (await get("/c/themes/midnight.css")).text(), /document\.head\.appendChild/);
+		assert.match(await (await get("/c/styles/midnight/style.css")).text(), /document\.head\.appendChild/);
 		assert.equal((await get("/c/linked/shared.css")).status, 200, "in-project symlinks are followed");
 		assert.equal((await get("/c/../../../etc/hosts")).status, 404, "dot-dot traversal is blocked");
 		assert.equal((await get("/c/%2e%2e/%2e%2e/etc/hosts")).status, 404, "encoded traversal is blocked");
@@ -138,9 +138,13 @@ test("render: unsupported TypeScript syntax is explained", { skip: !canRender },
 	assert.match(r.stderr, /enum/i);
 });
 
-test("every theme styles the whole class contract", () => {
-	const dir = join(HERE, "example", "themes");
-	const themes = readdirSync(dir).filter((f) => f.endsWith(".css"));
-	assert.ok(themes.length >= 2);
-	for (const f of themes) for (const cls of [".stage", ".line", ".title", ".subtitle", ".accent"]) assert.ok(readFileSync(join(dir, f), "utf-8").includes(cls), `${f} is missing ${cls}`);
+test("every style has a folder with style.css, STYLE.md and the whole class contract", () => {
+	const dir = join(HERE, "example", "styles");
+	const styles = readdirSync(dir);
+	assert.ok(styles.length >= 3);
+	for (const s of styles) {
+		for (const f of ["style.css", "STYLE.md"]) assert.ok(existsSync(join(dir, s, f)), `${s}/${f} is missing`);
+		const css = readFileSync(join(dir, s, "style.css"), "utf-8");
+		for (const cls of [".stage", ".line", ".title", ".subtitle", ".accent"]) assert.ok(css.includes(cls), `${s}/style.css is missing ${cls}`);
+	}
 });
