@@ -28,7 +28,7 @@ It is a cut-down [videowright](https://github.com/scosman/videowright) 0.1.1 (MI
        node render/vw.ts render <timeline.ts> --output out.mp4
 
    Project: a folder with `videowright.config.ts`, a `timeline.ts`, and `segments/<id>/index.ts`.
-   See https://github.com/Prithpal-Sooriya/tiny-video-renderer/tree/v0.1.1/example for a complete one.
+   See https://github.com/Prithpal-Sooriya/tiny-video-renderer/tree/main/example for a complete one.
 
    Segment code rules:
    - Erasable TypeScript only: no enum, namespace, constructor parameter properties or decorators. Use `import type`.
@@ -48,13 +48,26 @@ It is a cut-down [videowright](https://github.com/scosman/videowright) 0.1.1 (MI
 
 ```bash
 node vw.ts render <timeline.ts> [--output out.mp4] [--fps N] [--chrome PATH] [--no-sandbox] [--dry-run] [--verbose]
-node vw.ts render example/timeline.ts --output hello.mp4
+node vw.ts render example/timeline.ts --output hello.mp4   # try --output with themes: edit the import in example/timeline.ts
 ```
 
 Exit code 0 on success; on failure `Error: ...` and usually `Hint: ...`, exit 1. Throughput is about 15 frames per second at 1080p.
 Chrome is found via `--chrome`, `$CHROME_BIN`, Playwright's cached `chrome-headless-shell`, then system Chrome. Its sandbox stays on; if it cannot start (inside another sandbox or a container) the renderer retries without it and says so.
 
 A project's `timeline.ts` default-exports `{ meta: { title }, segments: [{ id, transition?: "fade" | "cut" | { type: "fade", duration } }], default_audio_track? }`. The audio track is `{ audio_file, length_s, timing: { perSegment } }` (path relative to the timeline); its timing overrides each segment's `advances`. `videowright.config.ts` sets `defaults: { resolution, fps }` (default 1920x1080 at 60). CSS imports are injected as `<style>`; images, fonts and audio are served from the project.
+
+## Themes
+
+The renderer has no built-in style: a theme is a CSS file your timeline imports (`import "./themes/midnight.css";`), and swapping themes is changing that one line. Two ship in [example/themes](example/themes): `midnight` (dark, the default) and `paper` (light). To use one, copy it into your project (the server only serves files inside the project) and import it. To make your own, style the contract classes the segments use, and nothing else, so any theme can replace any other:
+
+| Class | Role |
+|---|---|
+| `.stage` | full-frame container: layout and padding |
+| `.line` | one animated-in row; must start at `opacity: 0` because segments animate it in |
+| `.title`, `.subtitle` | the big heading and its muted second line |
+| `.accent` | highlight colour |
+
+Fonts: use system fonts, or serve a font file from the project with `@font-face`; the renderer waits for fonts before each screenshot.
 
 ## How it works, and how it was checked
 

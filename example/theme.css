@@ -1,5 +1,0 @@
-body { background: #0e141a; color: #e8eef5; font-family: "Helvetica Neue", Arial, sans-serif; }
-.stage { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 96px; gap: 20px; }
-.line { opacity: 0; font-size: 44px; }
-.big { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
-.accent { color: #ff8800; }

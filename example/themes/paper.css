@@ -1,0 +1,8 @@
+/* paper: light, warm off-white, serif headings, blue accent. Same contract as midnight. */
+:root { --bg: #f6f2ea; --fg: #1d232b; --muted: #5d6673; --accent: #1f5fd6; --font: "Helvetica Neue", Arial, sans-serif; --serif: Georgia, "Times New Roman", serif; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); }
+.stage { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 96px; gap: 24px; border-top: 8px solid var(--accent); }
+.line { opacity: 0; font-size: 44px; line-height: 1.25; }
+.title { font-family: var(--serif); font-size: 92px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+.subtitle { color: var(--muted); font-size: 40px; }
+.accent { color: var(--accent); }
