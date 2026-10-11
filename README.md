@@ -6,6 +6,14 @@ Write scenes as TypeScript that drives the DOM with Web Animations. `vw.ts` step
 
 It is a cut-down [videowright](https://github.com/scosman/videowright) 0.1.1 (MIT): same segment API, same time shim, but ~1,000 lines of its own plus the shim instead of ~6,650 lines and 95 npm packages. On five projects compared frame by frame against upstream, four were **bit-identical** (video and audio) and one differed in a single frame by at most 3/255 in 46 pixels. Built for agents: no preview UI, failures are loud.
 
+## Watch the walkthrough
+
+A 2m24s tour: what this is, how to use it, and how to restyle it. Rendered by this repo's own `vw.ts` with the bundled `motion-engineering` style.
+
+https://github.com/user-attachments/assets/d4f739fe-5eb4-44fd-9d11-4ea54768f4ad
+
+The same file is committed at [`docs/walkthrough.mp4`](docs/walkthrough.mp4) if you want it offline. Narration and captions are AI-generated with local Kokoro TTS; every visual is rendered from this repo.
+
 ## Add it to your skill (instructions for agents)
 
 1. Download the pinned file and verify it. Do not use `main` or a different version without reading the diff.
