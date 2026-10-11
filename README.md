@@ -8,9 +8,9 @@ It is a cut-down [videowright](https://github.com/scosman/videowright) 0.1.1 (MI
 
 ## Watch the walkthrough
 
-A 2m26s tour: what this is, how to use it, and how to restyle it. Rendered by this repo's own `vw.ts` with the bundled `motion-engineering` style.
+A 2m24s tour: what this is, how to use it, and how to restyle it. Rendered by this repo's own `vw.ts` with the bundled `motion-engineering` style.
 
-https://github.com/user-attachments/assets/1746c7da-147e-4827-a02a-0feed2ad7d03
+https://github.com/user-attachments/assets/d4f739fe-5eb4-44fd-9d11-4ea54768f4ad
 
 The same file is committed at [`docs/walkthrough.mp4`](docs/walkthrough.mp4) if you want it offline. Narration and captions are AI-generated with local Kokoro TTS; every visual is rendered from this repo.
 
