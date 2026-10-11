@@ -8,13 +8,13 @@ It is a cut-down [videowright](https://github.com/scosman/videowright) 0.1.1 (MI
 
 ## Watch the walkthrough
 
-A 2m15s tour: what this is, how to use it, and how to restyle it. Rendered by this repo's own `vw.ts` (v0.2.1) with the bundled `motion-engineering` style.
+A 2m26s tour: what this is, how to use it, and how to restyle it. Rendered by this repo's own `vw.ts` with the bundled `motion-engineering` style.
 
 [![Watch the walkthrough](docs/walkthrough-poster.jpg)](docs/walkthrough.mp4)
 
 <video src="docs/walkthrough.mp4" poster="docs/walkthrough-poster.jpg" controls width="100%"></video>
 
-The poster is a link to the file, and the `<video>` tag plays it inline where the renderer allows it (GitHub strips `<video>`; editors and doc sites that support it play the same file). Narration and captions are AI-generated with local Kokoro TTS; every visual comes from this repo at v0.2.1.
+The poster is a link to the file, and the `<video>` tag plays it inline where the renderer allows it (GitHub strips `<video>`; editors and doc sites that support it play the same file). Narration and captions are AI-generated with local Kokoro TTS; every visual is rendered from this repo.
 
 ## Add it to your skill (instructions for agents)
 
