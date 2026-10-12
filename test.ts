@@ -64,13 +64,14 @@ test("loader: bare 'videowright', CSS imports and .js-for-.ts imports resolve", 
 test("server: strips types, resolves extensionless, wraps CSS, guards paths, sends Chrome only the browser half", async () => {
 	const outside = mkdtempSync(join(tmpdir(), "vw-outside-"));
 	writeFileSync(join(outside, "shared.css"), "a{color:red}");
-	const dir = project({ "segments/label.ts": "export function label(text: string): string { return text; }\n", "segments/bad.ts": "enum E { A }\nexport const e = E.A;\n" });
+	const dir = project({ "segments/label.ts": "export function label(text: string): string { return text; }\n", "segments/bad.ts": "enum E { A }\nexport const e = E.A;\n", "segments/ba d/index.ts": "export default { id: 'ba d', advances: [1], play: async () => {} };\n" });
 	symlinkSync(outside, join(dir, "linked")); // a symlink the project owner placed inside the project
 	const server = await startServer(dir, join(dir, "timeline.ts"), 10);
 	const get = (p: string) => fetch(server.url + p);
 	try {
 		assert.match(await (await get("/render.html")).text(), /"videowright":"\/__vw\/vw\.ts"/);
 		assert.match(await (await get("/__vw/virtual.js")).text(), /"steps": \(\) => import\("\/c\/segments\/steps\/index\.ts"\)/);
+		assert.ok(!(await (await get("/__vw/virtual.js")).text()).includes("ba d"), "unusual segment names are not inlined into generated code");
 
 		const browser = await (await get("/__vw/vw.ts")).text();
 		assert.match(browser, /export function defineSegment/);
@@ -81,9 +82,17 @@ test("server: strips types, resolves extensionless, wraps CSS, guards paths, sen
 		assert.equal((await get("/c/linked/shared.css")).status, 200, "in-project symlinks are followed");
 		assert.equal((await get("/c/../../../etc/hosts")).status, 404, "dot-dot traversal is blocked");
 		assert.equal((await get("/c/%2e%2e/%2e%2e/etc/hosts")).status, 404, "encoded traversal is blocked");
-		const bad = await get("/c/segments/bad.ts");
-		assert.equal(bad.status, 500);
-		assert.match(await bad.text(), /enum/i);
+		const logged: string[] = [];
+		const origError = console.error;
+		console.error = (...args: unknown[]) => { logged.push(args.join(" ")); };
+		try {
+			const bad = await get("/c/segments/bad.ts");
+			assert.equal(bad.status, 500);
+			assert.equal(await bad.text(), "internal server error", "the response body carries no local detail");
+		} finally {
+			console.error = origError;
+		}
+		assert.match(logged.join("\n"), /enum/i, "the reason goes to the server log");
 		const foreign = await new Promise<number>((resolve, reject) => {
 			const u = new URL(server.url); // fetch() ignores a custom Host header, so use node:http
 			request({ host: u.hostname, port: u.port, path: "/render.html", headers: { Host: "evil.example:80" } }, (res) => (res.resume(), resolve(res.statusCode ?? 0))).on("error", reject).end();
