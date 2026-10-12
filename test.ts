@@ -1,7 +1,7 @@
 // node --test test.ts   (the render tests skip themselves when Chrome or ffmpeg is missing)
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, statSync, symlinkSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, symlinkSync, writeFileSync } from "node:fs";
 import { request } from "node:http";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
@@ -116,7 +116,8 @@ test("render: writes an mp4", { skip: !canRender }, () => {
 	const r = render(join(HERE, "example", "timeline.ts"), "--fps", "5", "--output", out);
 	assert.equal(r.status, 0, r.stderr);
 	assert.match(r.stdout, /Rendered 35 frames/);
-	assert.ok(statSync(out).size > 1000 && readFileSync(out).subarray(4, 8).toString() === "ftyp");
+	const bytes = readFileSync(out);
+	assert.ok(bytes.length > 1000 && bytes.subarray(4, 8).toString() === "ftyp");
 });
 
 test("render: a segment that throws fails the render with its message", { skip: !canRender }, () => {
